@@ -22,8 +22,11 @@ int main(){
 	<< blue << "Blue\t-> 2nd line" << endl
 	<< red << "Red\t-> cross the thin red line" << endl;
 
+   cout << "\033[9mHallo\033[0m" << endl
+        << "\033[5mInverse\033[0m" << endl
+	<< "\0335ninfo" << endl;
    // reset de kleur anders blijft console in laatste kleur staan
-   cout << setColor(fg_defaultC);
+   //cout << setColor(fg_defaultC);
 	
 	
    return 0;

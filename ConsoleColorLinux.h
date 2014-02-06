@@ -10,7 +10,6 @@
  * Test programma ANSI escape codes om console van kleur te voorzien.
  * https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes 
  */
-
 #include <iostream>
 
 #include <sstream> // for old solution
