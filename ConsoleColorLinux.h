@@ -12,8 +12,9 @@
  */
 
 #include <iostream>
-#include <sstream>
-#include <string>
+
+#include <sstream> // for old solution
+#include <string>  // for old solution
 
 using namespace std;
 
@@ -46,8 +47,7 @@ string setColor(int &color){
   return stream.str();
 }
 
-/////// Inline with stream //////
-
+/////// NEW Inline with stream //////
 /// Foreground colors ///
 inline std::ostream& black(std::ostream &s){
    s << "\033[" << fg_black << "m";
@@ -90,7 +90,6 @@ inline std::ostream& white(std::ostream &s){
 }
 
 ///Background colors ///
-
 inline std::ostream& BG_black(std::ostream &s){
    s << "\033[" << bg_black << "m";
    return s;
