@@ -12,31 +12,121 @@
  */
 
 #include <iostream>
+#include <sstream>
+#include <string>
+
+using namespace std;
 
 // Foreground colors
-int fg_defaultC = 39;
-int fg_black = 30;
-int fg_red = 31;
-int fg_green = 32;
-int fg_yellow = 33;
-int fg_blue = 34;
-int fg_magenta = 35;
-int fg_cyan = 36;
-int fg_white = 37;
+static int fg_defaultC = 39;
+static int fg_black = 30;
+static int fg_red = 31;
+static int fg_green = 32;
+static int fg_yellow = 33;
+static int fg_blue = 34;
+static int fg_magenta = 35;
+static int fg_cyan = 36;
+static int fg_white = 37;
 
 // Background colors
-int bg_defaultC = 49;
-int bg_black = 40;
-int bg_red = 41;
-int bg_green = 42;
-int bg_yellow = 43;
-int bg_blue = 44;
-int bg_magenta = 45;
-int bg_cyan = 46;
-int bg_white = 47;
+static int bg_defaultC = 49;
+static int bg_black = 40;
+static int bg_red = 41;
+static int bg_green = 42;
+static int bg_yellow = 43;
+static int bg_blue = 44;
+static int bg_magenta = 45;
+static int bg_cyan = 46;
+static int bg_white = 47;
 
-// function declaration
-void setColor(int &color){  
-  std::cout << "\033[" << color << "m";
+// OLD function declaration
+string setColor(int &color){  
+  ostringstream stream;
+  stream << "\033[" << color << "m";
+  return stream.str();
 }
 
+/////// Inline with stream //////
+
+/// Foreground colors ///
+inline std::ostream& black(std::ostream &s){
+   s << "\033[" << fg_black << "m";
+   return s;
+}
+
+inline std::ostream& red(std::ostream &s){
+   s << "\033[" << fg_red << "m";
+   return s;
+}
+
+inline std::ostream& green(std::ostream &s){
+   s << "\033[" << fg_green << "m";
+   return s;
+}
+
+inline std::ostream& yellow(std::ostream &s){
+   s << "\033[" << fg_yellow << "m";
+   return s;
+}
+
+inline std::ostream& blue(std::ostream &s){
+   s << "\033[" << fg_blue << "m";
+   return s;
+}
+
+inline std::ostream& magenta(std::ostream &s){
+   s << "\033[" << fg_magenta << "m";
+   return s;
+}
+
+inline std::ostream& cyan(std::ostream &s){
+   s << "\033[" << fg_cyan << "m";
+   return s;
+}
+
+inline std::ostream& white(std::ostream &s){
+   s << "\033[" << fg_white << "m";
+   return s;
+}
+
+///Background colors ///
+
+inline std::ostream& BG_black(std::ostream &s){
+   s << "\033[" << bg_black << "m";
+   return s;
+}
+
+inline std::ostream& BG_red(std::ostream &s){
+   s << "\033[" << bg_red << "m";
+   return s;
+}
+
+inline std::ostream& BG_green(std::ostream &s){
+   s << "\033[" << bg_green << "m";
+   return s;
+}
+
+inline std::ostream& BG_yellow(std::ostream &s){
+   s << "\033[" << bg_yellow << "m";
+   return s;
+}
+
+inline std::ostream& BG_blue(std::ostream &s){
+   s << "\033[" << bg_blue << "m";
+   return s;
+}
+
+inline std::ostream& BG_magenta(std::ostream &s){
+   s << "\033[" << bg_magenta << "m";
+   return s;
+}
+
+inline std::ostream& BG_cyan(std::ostream &s){
+   s << "\033[" << bg_cyan << "m";
+   return s;
+}
+
+inline std::ostream& BG_white(std::ostream &s){
+   s << "\033[" << bg_white << "m";
+   return s;
+}
