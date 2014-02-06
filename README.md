@@ -14,6 +14,6 @@ forground colors and background colors.
 ##Compile
 To compile a program with the library do:<br>
 <code>
-g++ -I. <program.cpp> -o <outputname>
+g++ -I. \<program.cpp\> -o <outputname>
 </code><br>
 The '-I.' option is used to scan for the '.h' files in the current directory<br>
