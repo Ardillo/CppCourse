@@ -7,16 +7,16 @@ int main(){
    
    cout ///OLD METHOD
         << endl << "OLD" 
-	<< endl << "===" << endl
-	<< setColor(fg_green) 
-	<< "Green\t-> hello green" << endl
-	<< setColor(fg_blue)
-	<< "Blue\t-> 2nd line" << endl
-	<< setColor(fg_red)
-	<< "Red\t-> cross the thin red line" << endl
-	<< setColor(fg_defaultC)
+	<< endl << "===" << endl;
+   setColor(FG_GREEN); 
+        cout << "Green\t-> hello green" << endl;
+   setColor(FG_BLUE);
+        cout << "Blue\t-> 2nd line" << endl;
+   setColor(FG_RED);
+        cout << "Red\t-> cross the thin red line" << endl;
+   setColor(FG_DEFAULTC);
 	/// New Method
-	<< endl << "NEW" 
+   cout	<< endl << "NEW" 
 	<< endl << "===" << endl
 	<< green << "Green\t-> hello green" << endl
 	<< blue << "Blue\t-> 2nd line" << endl

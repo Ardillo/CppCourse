@@ -26,7 +26,7 @@ int main() {
     cout << "***";      
   }
   cout << endl;
-  setColor(fg_defaultC);
+  setColor(39);
 
   // achtergrond kleur aanpassen
   for(int i=40; i<48; i++){
@@ -34,7 +34,7 @@ int main() {
     cout << "***";      
   }
   // reset kleur en print lege regel
-  setColor(bg_defaultC);
+  setColor(49);
   cout << endl << endl; 
   
   //setManualColor(fg_location, colorMode_type, 255, 0, 0);
