@@ -17,7 +17,7 @@
  * 	deque
  * 	memory
  * 
- ********** DECODEREN ************
+ ********** CODEREN ************
  * Geen hoofdletters in string.
  * 
  **** FASE 1 ****
@@ -34,7 +34,7 @@
  * 
  * EOF
  *
- ********* CODEREN **************
+ ********* DECODEREN **************
  **** FASE 1 ****
  * haal chars teken voor teken uit string
  * 	1e in queue
@@ -62,31 +62,80 @@
 
 using namespace std;
 
-const int ENCRYPT = 0;
-const int DECRYPT = 1;
+typedef enum {encrypt, decrypt} function;
+
+void printHeader();
+void functionQuestion(function &f);
+string getText();
+string codeer(string &input);
+void printResult(string &input, string &output);
+void again();
 
 const bool DEBUG = true;
+bool end = false;
+function func;
+
 
 int main() {
-   ///Startup
-   string tekst = "";
-   string command = "";
+
+   printHeader();
+   
+   while(!end){	        
+      functionQuestion(func);
+      string input = getText();
+      string output;
+      if(func == encrypt)	 
+	 output = codeer(input);
+      else if(func == decrypt){
+	 cout << "....decrypting" << endl;
+      }
+      printResult(input, output);
+      again();
+   }
+   cout << bg_black << red << "End of program" << reset << endl << endl;
+   return 0;
+}
+
+void printHeader(){
    cout << endl << "\t" << bg_red << black 
         << "=======================================" << reset << endl
         << "\t" << bg_red << black 
         << "|| Encryption and Decryption program ||" << reset << endl
         << "\t" << bg_red << black
         << "=======================================" << reset << endl << endl;
-   cout << "Voer tekst in: ";
-   getline( cin, tekst);
-   
-   //TODO
-   cout << "Encrypt (" << blue << "E" << reset << ") "
-        << "or Decrypt (" << blue << "D" << reset << "): " << blue;
-   getline( cin, command);
-   cout << reset;
-   
-   ///Decrypt
+}
+
+void functionQuestion(function &f){
+   bool done = false;
+   while(!done){
+      string command = "";
+      cout << "Encrypt (" << blue << "E" << reset << ") "
+	 << "or Decrypt (" << blue << "D" << reset << "): " << blue;
+      getline( cin, command); 
+      cout << reset;
+      
+      if(command == "E"){
+	 f = encrypt; 
+	 done = true;
+      }
+      else if(command == "D"){
+	 f = decrypt;
+         done = true;
+      }
+      else
+	 cout << red << "Error, not a valid option" << reset << endl;
+   }
+}
+
+string getText(){
+   string txt;
+   cout << "Fill in text: " << endl;
+   getline( cin, txt);
+   return txt;
+}
+
+string codeer(string &input){
+   cout << blue << "    ENCRYPTING" << endl;
    const string klinkers = "aeiouy";
    string::iterator pos;
    stack<char> stk;
@@ -97,7 +146,7 @@ int main() {
       cout << blue << setw(3) << right << "/|" << white << " Fase 1" << endl
 	   << blue << "//" << endl;
    }
-   for( pos = tekst.begin(); pos != tekst.end(); ++pos){
+   for( pos = input.begin(); pos != input.end(); ++pos){
       if(klinkers.find(*pos) == string::npos){
 	 if(DEBUG){
 	    cout << blue << "|| " << reset
@@ -169,13 +218,21 @@ int main() {
       cout << endl << blue << "\\\\" << endl 
 	   << setw(3) << right << "\\|" << reset << endl;
    }
-    
-   ///RESULT
+   return output;
+}
+
+void printResult(string &input, string &output){
    cout << endl;
    cout << green << left << setw(16) << "Plain text: " 
-        << reset << tekst << endl;
+        << reset << input << endl;
    cout << red << left << setw(16) << "Encrypted text: " 
         << reset << output << endl << endl;
-   
-   return 0;
 }
+
+void again(){
+   cout << "Restart again? (Y/n)";
+   string answer;
+   getline(cin, answer);
+   if(answer == "n")
+      end = true;
+}  
