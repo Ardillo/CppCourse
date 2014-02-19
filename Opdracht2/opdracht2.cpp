@@ -93,8 +93,10 @@ int main() {
    deque<char> dqe;
    string output;
    //Fase 1
-   cout << blue << setw(3) << right << "/|" << white << " Fase 1" << endl
-        << blue << "//" << endl;
+   if(DEBUG){
+      cout << blue << setw(3) << right << "/|" << white << " Fase 1" << endl
+	   << blue << "//" << endl;
+   }
    for( pos = tekst.begin(); pos != tekst.end(); ++pos){
       if(klinkers.find(*pos) == string::npos){
 	 if(DEBUG){
@@ -132,23 +134,29 @@ int main() {
    }
 
    //Fase 2
-   cout << blue << setw(3) << right << "/|" << white << " Fase 2" << endl
-   << blue << "//" << endl;
+   if(DEBUG){
+      cout << blue << setw(3) << right << "/|" << white << " Fase 2" << endl
+	   << blue << "//" << endl;
+   }
    int deque_size = dqe.size(); //hij wordt namelijk kleiner als je er mee werkt
    for(int i = 0; i < deque_size; ++i){
       if(i%2 == 1){
 	 char x = dqe.back();
 	 dqe.pop_back();	
-	 cout << blue << "|| " << reset
-	      << x << " from " << setw(6) << left 
-	      << "back" << "--> to string" << endl;
+	 if(DEBUG){
+	    cout << blue << "|| " << reset
+	         << x << " from " << setw(6) << left 
+	         << "back" << "--> to string" << endl;
+	 }
 	 output += x;
       }
       else {
 	 char x = dqe.front();
 	 dqe.pop_front();
-	 cout << blue << "|| " << reset
-	      << x << " from front --> to string" << endl;
+	 if(DEBUG){ 
+	    cout << blue << "|| " << reset
+	         << x << " from front --> to string" << endl;
+	 }
 	 output += x;      
       }      
    }
@@ -162,11 +170,12 @@ int main() {
 	   << setw(3) << right << "\\|" << reset << endl;
    }
     
-   
+   ///RESULT
+   cout << endl;
    cout << green << left << setw(16) << "Plain text: " 
         << reset << tekst << endl;
    cout << red << left << setw(16) << "Encrypted text: " 
-        << reset << output << endl;
+        << reset << output << endl << endl;
    
    return 0;
 }
