@@ -12,9 +12,6 @@
  */
 #include <iostream>
 
-//#include <sstream> // for old solution
-//#include <string>  // for old solution
-
 using namespace std;
 
 // Foreground colors
@@ -38,11 +35,6 @@ const int BG_BLUE = 44;
 const int BG_MAGENTA = 45;
 const int BG_CYAN = 46;
 const int BG_WHITE = 47;
-
-// OLD function declaration
-void setColor(int color){  
-  std::cout << "\033[" << color << "m";
-}
 
 /////// NEW Inline with stream //////
 /// Reset foreground and background colors (reset all ANSI escape codes///
