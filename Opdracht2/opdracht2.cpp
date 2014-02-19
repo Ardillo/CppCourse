@@ -58,6 +58,7 @@
 #include <string>
 #include <stack>
 #include <deque>
+#include <queue>
 #include <ConsoleColorLinux.h>
 
 using namespace std;
@@ -68,6 +69,7 @@ void printHeader();
 void functionQuestion(function &f);
 string getText();
 string codeer(string &input);
+string decodeer(string &input);
 void printResult(string &input, string &output);
 void again();
 
@@ -86,9 +88,8 @@ int main() {
       string output;
       if(func == encrypt)	 
 	 output = codeer(input);
-      else if(func == decrypt){
-	 cout << "....decrypting" << endl;
-      }
+      else if(func == decrypt)
+	 output = decodeer(input);
       printResult(input, output);
       again();
    }
@@ -221,6 +222,55 @@ string codeer(string &input){
    return output;
 }
 
+string decodeer(string &input){
+   cout << blue << "    DECRYPTING" << endl;
+   string::iterator pos;
+   queue<char> q;
+   stack<char> s;
+   string output;
+   
+   if(DEBUG){
+      cout << blue << setw(3) << right << "/|" << white << " Fase 1" << endl
+	   << blue << "//" << endl;
+   }
+  
+   for(int i = 0; i <input.size(); ++i){
+      if(i%2 == 0){
+	 char x = input.at(i);
+	 q.push(x);
+	 cout << blue << "|| " << reset
+	      << x << " --> to queue" << endl;	 
+      }
+      else{
+	 char x = input.at(i);
+	 s.push(x);
+	 cout << blue << "|| " << reset
+	      << x << " --> to stack" << endl;
+      }
+      //TODO hier gebleven, --> pop stack leeg en voeg iedere char toe aan queue
+   }
+   if(DEBUG){
+      cout << blue << "|| " << white << "result of Fase 1:" << endl
+           << blue << "|| " << reset;
+	   //doe iets met iterator
+      cout << endl << blue << "\\\\" << endl 
+	   << setw(3) << right << "\\|" << reset << endl;
+   }
+   
+   if(DEBUG){
+      cout << blue << setw(3) << right << "/|" << white << " Fase 2" << endl
+	   << blue << "//" << endl;
+   }
+   
+   if(DEBUG){
+      cout << blue << "|| " << white << "result of Fase 2:" << endl
+           << blue << "|| " << reset;
+	   //doe iets met iterator
+      cout << endl << blue << "\\\\" << endl 
+	   << setw(3) << right << "\\|" << reset << endl;	   
+   }
+   return output;
+}
 void printResult(string &input, string &output){
    cout << endl;
    cout << green << left << setw(16) << "Plain text: " 
