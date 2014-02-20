@@ -72,16 +72,15 @@ string codeer(string &input);
 string decodeer(string &input);
 void printResult(string &input, string &output, function &func);
 void again();
+void eop();
 
 const bool DEBUG = false;
 bool end = false;
 function func;
 
-
+//Main program
 int main() {
-
    printHeader();
-   
    while(!end){	        
       functionQuestion(func);
       string input = getText();
@@ -93,10 +92,11 @@ int main() {
       printResult(input, output, func);
       again();
    }
-   cout << bg_black << red << "End of program" << reset << endl << endl;
+   eop();
    return 0;
 }
 
+//Just a intro header
 void printHeader(){
    cout << endl << "\t" << bg_red << black 
         << "=======================================" << reset << endl
@@ -106,6 +106,7 @@ void printHeader(){
         << "=======================================" << reset << endl << endl;
 }
 
+//Question what the program should do, Encrypt or Decrypt
 void functionQuestion(function &f){
    bool done = false;
    while(!done){
@@ -128,6 +129,7 @@ void functionQuestion(function &f){
    }
 }
 
+//Function for getting input text for algorithm
 string getText(){
    string txt;
    cout << "Fill in text: " << endl;
@@ -135,6 +137,7 @@ string getText(){
    return txt;
 }
 
+//Encrypting algorithm
 string codeer(string &input){
    cout << blue << "    ENCRYPTING" << endl;
    const string klinkers = "aeiouy";
@@ -222,6 +225,7 @@ string codeer(string &input){
    return output;
 }
 
+//Decrypting algorithm
 string decodeer(string &input){
    cout << blue << "    DECRYPTING" << endl;
    const string klinkers = "aeiouy";
@@ -317,6 +321,7 @@ string decodeer(string &input){
    return output;
 }
 
+//Prints results depending if your are encrypting or decrypting
 void printResult(string &input, string &output, function &func){
    cout << endl;
    if(func == encrypt){
@@ -333,6 +338,7 @@ void printResult(string &input, string &output, function &func){
    }  
 }
 
+//Question for restart program
 void again(){
    cout << "Restart again? (Y/n)";
    string answer;
@@ -340,3 +346,8 @@ void again(){
    if(answer == "n")
       end = true;
 }  
+
+//Finish program string
+void eop(){
+   cout << bg_black << red << "End of program" << reset << endl << endl;
+}
