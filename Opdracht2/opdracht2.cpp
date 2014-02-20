@@ -70,10 +70,10 @@ void functionQuestion(function &f);
 string getText();
 string codeer(string &input);
 string decodeer(string &input);
-void printResult(string &input, string &output);
+void printResult(string &input, string &output, function &func);
 void again();
 
-const bool DEBUG = true;
+const bool DEBUG = false;
 bool end = false;
 function func;
 
@@ -90,7 +90,7 @@ int main() {
 	 output = codeer(input);
       else if(func == decrypt)
 	 output = decodeer(input);
-      printResult(input, output);
+      printResult(input, output, func);
       again();
    }
    cout << bg_black << red << "End of program" << reset << endl << endl;
@@ -224,11 +224,13 @@ string codeer(string &input){
 
 string decodeer(string &input){
    cout << blue << "    DECRYPTING" << endl;
+   const string klinkers = "aeiouy";
    string::iterator pos;
    queue<char> q;
    stack<char> s;
-   string output;
+   string output, EOFase1;
    
+   //Fase 1
    if(DEBUG){
       cout << blue << setw(3) << right << "/|" << white << " Fase 1" << endl
 	   << blue << "//" << endl;
@@ -238,45 +240,97 @@ string decodeer(string &input){
       if(i%2 == 0){
 	 char x = input.at(i);
 	 q.push(x);
-	 cout << blue << "|| " << reset
-	      << x << " --> to queue" << endl;	 
+	 EOFase1 = x + EOFase1;
+	 if(DEBUG){
+	    cout << blue << "|| " << reset
+	         << x << " --> to queue" << endl;	 
+	 }
       }
       else{
 	 char x = input.at(i);
 	 s.push(x);
-	 cout << blue << "|| " << reset
-	      << x << " --> to stack" << endl;
+	 if(DEBUG){
+	    cout << blue << "|| " << reset
+	         << x << " --> to stack" << endl;
+	 }
       }
-      //TODO hier gebleven, --> pop stack leeg en voeg iedere char toe aan queue
    }
+   while(!s.empty()){
+      q.push(s.top());
+      EOFase1 = s.top() + EOFase1;
+      s.pop();
+   }
+   
    if(DEBUG){
       cout << blue << "|| " << white << "result of Fase 1:" << endl
-           << blue << "|| " << reset;
-	   //doe iets met iterator
+           << blue << "|| " << reset << "in--> ";
+      for(pos = EOFase1.begin(); pos != EOFase1.end(); ++pos){
+	 cout << *pos << " ";  
+      }
+      cout << "-->out";
       cout << endl << blue << "\\\\" << endl 
 	   << setw(3) << right << "\\|" << reset << endl;
    }
    
+   //Fase 2
    if(DEBUG){
       cout << blue << setw(3) << right << "/|" << white << " Fase 2" << endl
 	   << blue << "//" << endl;
+   }
+   while(!q.empty()){
+      char x = q.front();
+      if(klinkers.find(x) == string::npos){
+	 if(DEBUG){
+	    cout << blue << "|| " << reset
+	         << setw(2) << left << x << "!klinker --> to stack" << endl;
+	 }
+	 s.push(x);
+         q.pop();
+      }
+      else{
+	 if(DEBUG){
+	    cout << blue << "|| " << reset
+	         << setw(3) << left << x << "klinker --> all to string" << endl;
+	 }
+	 while(!s.empty()){
+	    output += s.top();
+	    s.pop();
+	 }
+	 output += x;
+	 q.pop();	 
+      }     
+   }
+   while(!s.empty()){
+      output += s.top();
+      s.pop();
    }
    
    if(DEBUG){
       cout << blue << "|| " << white << "result of Fase 2:" << endl
            << blue << "|| " << reset;
-	   //doe iets met iterator
+      for(pos = output.begin(); pos != output.end(); ++pos){
+	 cout << *pos << " ";  
+      }
       cout << endl << blue << "\\\\" << endl 
 	   << setw(3) << right << "\\|" << reset << endl;	   
    }
    return output;
 }
-void printResult(string &input, string &output){
+
+void printResult(string &input, string &output, function &func){
    cout << endl;
-   cout << green << left << setw(16) << "Plain text: " 
-        << reset << input << endl;
-   cout << red << left << setw(16) << "Encrypted text: " 
-        << reset << output << endl << endl;
+   if(func == encrypt){
+      cout << green << left << setw(16) << "Plain text: " 
+	   << reset << input << endl;
+      cout << red << left << setw(16) << "Encrypted text: " 
+	   << reset << output << endl << endl;
+   }
+   else{
+      cout << green << left << setw(16) << "Encrypted text: " 
+	   << reset << input << endl;
+      cout << red << left << setw(16) << "Plain text: " 
+	   << reset << output << endl << endl;
+   }  
 }
 
 void again(){
