@@ -74,7 +74,7 @@ void printResult(string &input, string &output, function &func);
 void again();
 void eop();
 
-const bool DEBUG = false;
+const bool DEBUG = true;
 bool end = false;
 function func;
 
