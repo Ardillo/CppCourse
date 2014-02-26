@@ -40,24 +40,41 @@ class MV{
 
 
 int main(){
-   cout << "Programma" << endl;
-   Teller count;
-   cout << "counter: " << count.getWaarde() << endl;
-   count.verhoog();
-   cout << "counter: " << count.getWaarde() << endl;
-   count.verlaag();
-   cout << "counter: " << count.getWaarde() << endl;
-   count.setWaarde(5);
-   cout << "counter: " << count.getWaarde() << endl;
-   count.verlaag();
-   cout << "counter: " << count.getWaarde() << endl;
-   
+   char command;
    MV statistiek;
-   cout << "stats:" << endl << statistiek;
-   statistiek.man(); statistiek.man();
-   statistiek.vrouw();
-   cout << "stats: na increment" << endl << statistiek;
+   bool end = false;
 
+   while(!end){
+      cout << "press command (M)an, (V)rouw, (S)top:" << endl;
+      cin >> command;
+      
+      switch(command){
+	 case 'M':
+	    statistiek.man();
+	    break;
+	 case 'm':
+	    statistiek.man();
+	    break;
+	 case 'V':
+	    statistiek.vrouw();
+	    break;
+	 case 'v':
+	    statistiek.vrouw();
+	    break;
+	 case 'S':
+	    cout << "Statistiek:" << endl
+	         << statistiek << endl;
+            end = true;
+	    break;
+	 case 's':
+	    cout << "Statistiek:" << endl
+	         << statistiek << endl;
+            end = true;
+	    break;
+	 default:
+	    break;
+      }
+   }
    return 0;
 }
 
