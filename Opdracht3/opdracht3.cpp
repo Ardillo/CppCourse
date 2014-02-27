@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <ctype.h>
 
 using namespace std;
 
@@ -48,25 +49,14 @@ int main(){
       cout << "press command (M)an, (V)rouw, (S)top:" << endl;
       cin >> command;
       
-      switch(command){
+      switch(toupper(command)){
 	 case 'M':
-	    statistiek.man();
-	    break;
-	 case 'm':
 	    statistiek.man();
 	    break;
 	 case 'V':
 	    statistiek.vrouw();
 	    break;
-	 case 'v':
-	    statistiek.vrouw();
-	    break;
 	 case 'S':
-	    cout << "Statistiek:" << endl
-	         << statistiek << endl;
-            end = true;
-	    break;
-	 case 's':
 	    cout << "Statistiek:" << endl
 	         << statistiek << endl;
             end = true;
