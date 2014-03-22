@@ -15,10 +15,10 @@ forground colors and background colors.
 ##Compile
 To compile a program with the library do:<br>
 <code>
-g++ -I. \<program.cpp\> -o \<outputname\>
+g++ -I ../libs/ \<program.cpp\> -o \<outputname\>
 </code><br>
 The '-I.' option is used to scan for the '.h' files in the current directory<br>
 For some programs it could be useful to compile them with the c++11 standard. 
 This is done by compiling with:<br>
 <code>
-g++ -I. \<program.cpp\> -o\<outputname\> -std=c++11
+g++ -I ../libs/ \<program.cpp\> -o\<outputname\> -std=c++11
